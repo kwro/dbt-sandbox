@@ -1,0 +1,13 @@
+.DS_Store
+.vscode/
+.idea/
+env/
+venv/
+
+dbt_modules/
+target/
+logs/
+
+keyfile.json
+profiles.yml
+init.sql
