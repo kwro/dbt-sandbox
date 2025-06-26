@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8
+    platform: linux/amd64
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+
+  dbt:
+    build: .
+    platform: linux/amd64
+    ports:
+      - "8080:8080"
+    container_name: dbt
+    volumes:
+      - ./dbt:/usr/app
+      - ~/.dbt:/root/.dbt
+    working_dir: /usr/app
+    depends_on:
+      - mysql
+    ## entrypoint: tail -f /dev/null
+    entrypoint: ["bash", "-c", "dbt docs generate --profiles-dir . && dbt docs serve --host 0.0.0.0 --port 8080 & tail -f /dev/null"]
