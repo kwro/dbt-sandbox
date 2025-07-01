@@ -1,0 +1,136 @@
+version: 2
+
+sources:
+  - name: mydb # required
+    description: Transactional database
+    database: mydb
+    schema: mydb
+#    loaded_at_field: <column_name>
+    meta:
+      data_owner: "Finance team"
+      used_in_reporting: true
+    tags: ['published']
+
+    # requires v1.1+
+#    config:
+##      <source_config>: <config_value>
+#      freshness:
+#        # changed to config in v1.9
+#        warn_after:
+#          count: <positive_integer>
+#          period: minute | hour | day
+#        error_after:
+#          count: <positive_integer>
+#          period: minute | hour | day
+#        filter: <where-condition>
+
+#    overrides: <string>
+
+#    quoting:
+#      database: true | false
+#      schema: true | false
+#      identifier: true | false
+
+    tables:
+    - name: wp_postmeta
+      columns:
+        - name: meta_id
+          description: "meta_id (mysql data type: bigint)"
+        - name: meta_key
+          description: "meta_key (mysql data type: varchar)"
+        - name: meta_value
+          description: "meta_value (mysql data type: longtext)"
+        - name: post_id
+          description: "post_id (mysql data type: bigint)"
+    - name: wp_wc_order_product_lookup
+      columns:
+        - name: coupon_amount
+          description: "coupon_amount (mysql data type: double)"
+        - name: customer_id
+          description: "customer_id (mysql data type: bigint)"
+        - name: date_created
+          description: "date_created (mysql data type: datetime)"
+        - name: order_id
+          description: "order_id (mysql data type: bigint)"
+        - name: order_item_id
+          description: "order_item_id (mysql data type: bigint)"
+        - name: product_gross_revenue
+          description: "product_gross_revenue (mysql data type: double)"
+        - name: product_id
+          description: "product_id (mysql data type: bigint)"
+        - name: product_net_revenue
+          description: "product_net_revenue (mysql data type: double)"
+        - name: product_qty
+          description: "product_qty (mysql data type: int)"
+        - name: shipping_amount
+          description: "shipping_amount"
+    - name: wp_wc_order_stats
+      columns:
+        - name: customer_id
+          description: "customer_id (mysql data type: bigint)"
+        - name: date_created
+          description: "date_created (mysql data type: datetime)"
+        - name: date_created_gmt
+          description: "date_created_gmt (mysql data type: datetime)"
+        - name: net_total
+          description: "net_total (mysql data type: double)"
+        - name: num_items_sold
+          description: "num_items_sold (mysql data type: int)"
+        - name: order_id
+          description: "order_id (mysql data type: bigint)"
+        - name: parent_id
+          description: "parent_id (mysql data type: bigint)"
+        - name: returning_customer
+          description: "returning_customer (mysql data type: tinyint)"
+        - name: shipping_total
+          description: "shipping_total (mysql data type: double)"
+        - name: status
+          description: "status (mysql data type: varchar)"
+    - name: wp_woocommerce_order_itemmeta
+      columns:
+        - name: meta_id
+          description: "meta_id (mysql data type: bigint)"
+        - name: meta_key
+          description: "meta_key (mysql data type: varchar)"
+        - name: meta_value
+          description: "meta_value (mysql data type: longtext)"
+        - name: order_item_id
+          description: "order_item_id (mysql data type: bigint)"
+    - name: wp_woocommerce_order_items
+      columns:
+        - name: order_id
+          description: "order_id (mysql data type: bigint)"
+        - name: order_item_id
+          description: "order_item_id (mysql data type: bigint)"
+        - name: order_item_name
+          description: "order_item_name (mysql data type: text)"
+        - name: order_item_type
+          description: "order_item_type (mysql data type: varchar)"
+    - name: wp_posts
+      columns:
+        - name: comment_count
+          description: "comment_count (mysql data type: bigint)"
+        - name: comment_status
+          description: "comment_status (mysql data type: varchar)"
+        - name: guid
+          description: "guid (mysql data type: varchar)"
+        - name: id
+          description: "id (mysql data type: bigint)"
+        - name: menu_order
+          description: "menu_order (mysql data type: int)"
+        - name: ping_status
+          description: "ping_status (mysql data type: varchar)"
+        - name: pinged
+          description: "pinged (mysql data type: text)"
+        - name: post_author
+          description: "post_author (mysql data type: bigint)"
+        - name: post_content
+          description: "post_content (mysql data type: longtext)"
+        - name: post_content_filtered
+          description: "post_content_filtered (mysql data type: longtext)"
+        - name: post_date
+          description: "post_date (mysql data type: timestamp)"
+
+#      - name: ... # declare properties of additional source tables
+#
+#  - name: ... # declare properties of additional sources

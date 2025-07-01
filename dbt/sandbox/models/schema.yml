@@ -1,0 +1,129 @@
+version: 2
+
+models:
+  - name: base_billing_meta
+    description: |
+      Model zawierający informacje o zamówieniach z danymi billingowymi
+      wyciągniętymi z tabeli wp_postmeta w źródle mydb.wp_postmeta.
+    columns:
+      - name: order_id
+        description: "ID zamówienia (post_id)"
+      - name: _billing_first_name
+        description: "Imię osoby rozliczającej (billing first name)"
+      - name: _billing_last_name
+        description: "Nazwisko osoby rozliczającej (billing last name)"
+      - name: _billing_email
+        description: "Adres email do rozliczeń (billing email)"
+      - name: _billing_phone
+        description: "Telefon do osoby rozliczającej (billing phone)"
+      - name: _billing_address_1
+        description: "Adres rozliczeniowy - ulica (billing address)"
+      - name: _billing_city
+        description: "Miasto rozliczeniowe (billing city)"
+      - name: _billing_postcode
+        description: "Kod pocztowy do rozliczeń (billing postcode)"
+      - name: _billing_country
+        description: "Kraj rozliczeniowy (billing country)"
+  - name: base_order_meta
+    description: |
+        Model zawierający informacje o zamówieniach z dodatkowymi
+        danymi dotyczącymi dostawy, płatności i podsumowania
+        wyciągniętymi z tabeli wp_postmeta w źródle mydb.wp_postmeta.
+    columns:
+      - name: order_id
+        description: "ID zamówienia (post_id)"
+      - name: delivery_date
+        description: "Data dostawy"
+      - name: delivery_time
+        description: "Czas dostawy"
+      - name: _payment_method_title
+        description: "Nazwa metody płatności"
+      - name: _order_shipping
+        description: "Koszt wysyłki"
+      - name: _order_shipping_tax
+        description: "Podatek od kosztu wysyłki"
+      - name: _order_total
+        description: "Całkowita kwota zamówienia"
+      - name: _order_tax
+        description: "Podatek od zamówienia"
+      - name: _cart_discount
+        description: "Rabat na koszyk"
+      - name: _cart_discount_tax
+        description: "Podatek od rabatu na koszyk"
+  - name: base_shipping_meta
+    description: |
+      Model zawierający dane dotyczące adresu dostawy zamówień,
+      wyciągnięte z tabeli wp_postmeta w źródle mydb.wp_postmeta.
+    columns:
+      - name: order_id
+        description: "ID zamówienia (post_id)"
+      - name: _shipping_first_name
+        description: "Imię odbiorcy"
+      - name: _shipping_last_name
+        description: "Nazwisko odbiorcy"
+      - name: _shipping_email
+        description: "Email odbiorcy"
+      - name: _shipping_phone
+        description: "Telefon odbiorcy"
+      - name: _shipping_address_1
+        description: "Adres dostawy (linia 1)"
+      - name: _shipping_city
+        description: "Miasto dostawy"
+      - name: _shipping_postcode
+        description: "Kod pocztowy dostawy"
+      - name: _shipping_country
+        description: "Kraj dostawy"
+  - name: your_model_name  # <- zmień na nazwę swojego modelu
+    description: |
+      Model zawierający podsumowanie zamówień z WooCommerce, łączący
+      dane o zamówieniu, wysyłce, fakturowaniu, kuponach, napiwkach,
+      komentarzach użytkowników oraz subskrypcjach newslettera.
+    columns:
+      - name: order_id
+        description: "Unikalny identyfikator zamówienia"
+      - name: date_created
+        description: "Data utworzenia zamówienia"
+      - name: status
+        description: "Status zamówienia"
+      - name: delivery_date
+        description: "Data dostawy"
+      - name: delivery_time
+        description: "Godzina dostawy"
+      - name: payment_method
+        description: "Metoda płatności"
+      - name: customer_id
+        description: "Identyfikator klienta"
+      - name: returning_customer
+        description: "Czy klient powracający (true/false)"
+      - name: shipping_postcode
+        description: "Kod pocztowy miejsca wysyłki"
+      - name: billing_nip
+        description: "Numer NIP klienta (faktura)"
+      - name: billing_faktura
+        description: "Informacja o fakturze"
+      - name: mailchimp_subscribed
+        description: "Czy klient jest zapisany do newslettera (true/false)"
+      - name: order_shipping
+        description: "Koszt wysyłki"
+      - name: order_shipping_tax
+        description: "Podatek od wysyłki"
+      - name: napiwek
+        description: "Kwota napiwku"
+      - name: num_items_sold
+        description: "Liczba sprzedanych pozycji"
+      - name: total_sales
+        description: "Całkowita wartość sprzedaży"
+      - name: tax_total
+        description: "Całkowity podatek"
+      - name: shipping_total
+        description: "Całkowity koszt wysyłki"
+      - name: net_total
+        description: "Wartość netto zamówienia"
+      - name: discount_code
+        description: "Kod kuponu rabatowego"
+      - name: cart_discount
+        description: "Wartość rabatu na koszyk"
+      - name: cart_discount_tax
+        description: "Podatek od rabatu na koszyk"
+      - name: user_comment
+        description: "Komentarz użytkownika do zamówienia"

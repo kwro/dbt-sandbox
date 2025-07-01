@@ -1,0 +1,17 @@
+# .sqlfluff
+[sqlfluff]
+dialect = mysql
+
+# dbt specific settings (ważne!)
+templater = dbt
+sql_file_exts = .sql,.SQL
+
+# [sqlfluff:templater:dbt]
+project_dir = .
+
+# [sqlfluff:indentation]
+tab_space_size = 4
+indent_unit = space
+
+# [sqlfluff:rules]
+exclude_rules = LT01
