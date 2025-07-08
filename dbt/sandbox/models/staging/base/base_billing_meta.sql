@@ -1,6 +1,9 @@
 {% set billing_keys = [
     '_billing_first_name',
     '_billing_last_name',
+    'billing_company',
+    '_billing_nip',
+    '_billing_faktura',
     '_billing_email',
     '_billing_phone',
     '_billing_address_1',
@@ -20,4 +23,9 @@ SELECT
         {{- pivot_meta_value('meta_value', key) }}
     {%- endfor -%}
 FROM {{ source('mydb', 'wp_postmeta') }}
+WHERE meta_key IN (
+    {%- for key in billing_keys -%}
+        '{{ key }}'{%- if not loop.last -%}, {% endif %}
+    {%- endfor -%}
+)
 GROUP BY post_id

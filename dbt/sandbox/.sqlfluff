@@ -13,5 +13,6 @@ project_dir = .
 tab_space_size = 4
 indent_unit = space
 
-# [sqlfluff:rules]
+ [sqlfluff:rules]
 exclude_rules = LT01
+ignore = models/test_model.sql

@@ -5,31 +5,11 @@ sources:
     description: Transactional database
     database: mydb
     schema: mydb
-#    loaded_at_field: <column_name>
+    loaded_at_field: date_created
     meta:
       data_owner: "Finance team"
       used_in_reporting: true
     tags: ['published']
-
-    # requires v1.1+
-#    config:
-##      <source_config>: <config_value>
-#      freshness:
-#        # changed to config in v1.9
-#        warn_after:
-#          count: <positive_integer>
-#          period: minute | hour | day
-#        error_after:
-#          count: <positive_integer>
-#          period: minute | hour | day
-#        filter: <where-condition>
-
-#    overrides: <string>
-
-#    quoting:
-#      database: true | false
-#      schema: true | false
-#      identifier: true | false
 
     tables:
     - name: wp_postmeta
@@ -65,6 +45,10 @@ sources:
         - name: shipping_amount
           description: "shipping_amount"
     - name: wp_wc_order_stats
+      loaded_at_field: date_created
+      freshness:
+        warn_after: { count: 365, period: day }
+        error_after: { count: 1800, period: day }
       columns:
         - name: customer_id
           description: "customer_id (mysql data type: bigint)"
@@ -107,6 +91,10 @@ sources:
         - name: order_item_type
           description: "order_item_type (mysql data type: varchar)"
     - name: wp_posts
+      loaded_at_field: post_date
+      freshness:
+        warn_after: { count: 365, period: day }
+        error_after: { count: 1800, period: day }
       columns:
         - name: comment_count
           description: "comment_count (mysql data type: bigint)"
@@ -130,7 +118,3 @@ sources:
           description: "post_content_filtered (mysql data type: longtext)"
         - name: post_date
           description: "post_date (mysql data type: timestamp)"
-
-#      - name: ... # declare properties of additional source tables
-#
-#  - name: ... # declare properties of additional sources

@@ -1,6 +1,6 @@
 {{ config(
     enabled = true,
-    materialized = 'ephemeral'
+    materialized = 'table'
 ) }}
 
 WITH
@@ -14,7 +14,7 @@ order_meta AS (
         order_shipping_tax,
         order_total,
         order_tax,
-        art_discount,
+        cart_discount,
         cart_discount_tax
     FROM {{ ref('base_order_meta') }}
 ),
@@ -31,7 +31,7 @@ orders AS (
         returning_customer,
         status,
         customer_id,
-        CAST(date_created AS TIMESTAMP) AS date_created
+        date_created
     FROM {{ source('mydb', 'wp_wc_order_stats') }}
 ),
 

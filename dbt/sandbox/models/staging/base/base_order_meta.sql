@@ -21,4 +21,9 @@ SELECT
         {{ pivot_meta_value('meta_value', key) }}
     {%- endfor -%}
 FROM {{ source('mydb', 'wp_postmeta') }}
+WHERE meta_key IN (
+    {%- for key in order_keys -%}
+        '{{ key }}'{%- if not loop.last -%}, {% endif %}
+    {%- endfor -%}
+)
 GROUP BY post_id
